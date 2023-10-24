@@ -5,7 +5,7 @@ make sure to restore `iptables_v4.conf` in iptables, place `01-iptables_logs.con
   
 <br>
 
-## ansible
+## ansible task
  \
 This ansible project includes 2 roles, nginx (1.18) and php7.4-fpm. \
 Each role has variables as customization options. 
@@ -52,12 +52,6 @@ role php7.4-fpm accepts following variables: \
 `php7_4_error_log_wwwconf`	**defines error log location AND state in `www.conf` file** \
 `php7_4_memory_limit_wwwconf`	**defines memory limit in `www.conf` file** \
 `webroot` 			**defines webroot directory, where `index.php` file should be placed**  
-  
-<br>
-  
-## iptables task
-iptables rules are located at `iptables_task` directory.
-make sure to restore `iptables_v4.conf` in iptables, place `01-iptables_logs.conf` in `/etc/rsyslog.d/` directory and restart rsyslog so logging can work as intended.
   
 <br>
   
