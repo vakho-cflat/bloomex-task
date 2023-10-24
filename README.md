@@ -1,4 +1,11 @@
 # bloomex-tasks
+## iptables task
+iptables rules are located at `iptables_task` directory.
+make sure to restore `iptables_v4.conf` in iptables, place `01-iptables_logs.conf` in `/etc/rsyslog.d/` directory and restart rsyslog so logging can work as intended.
+  
+<br>
+<br>
+
 ## ansible
  \
 This ansible project includes 2 roles, nginx (1.18) and php7.4-fpm. \
@@ -52,4 +59,11 @@ role php7.4-fpm accepts following variables: \
 ## iptables task
 iptables rules are located at `iptables_task` directory.
 make sure to restore `iptables_v4.conf` in iptables, place `01-iptables_logs.conf` in `/etc/rsyslog.d/` directory and restart rsyslog so logging can work as intended.
+  
+<br>
+<br>  
+  
+## backup script task
+Added backup script in `backup` directory.  
+Description coming soon
 
