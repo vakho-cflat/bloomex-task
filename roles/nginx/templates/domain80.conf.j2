@@ -1,0 +1,22 @@
+server {
+    	listen 80;
+    	server_name {{ server_name }};
+    	root {{ www_dir }}{{ domain }};
+    
+    	index index.php index.html index.htm;
+        
+	location / {
+        try_files $uri $uri/ =404;
+        }
+
+
+	location ~ \.php$ {
+        fastcgi_pass {{ php7_4_socket_unix }};
+        include snippets/fastcgi-php.conf;
+        include fastcgi_params;
+
+	location ~ /\.ht {
+        deny all;
+    }
+  }
+}

@@ -1,0 +1,20 @@
+- name: Create selfsigned certificate directory
+  file:
+      state: directory
+      path: "{{ ssl_location }}"
+      owner: "root"
+      group: "root"
+      mode: 0660
+
+- name: Creating self-signed SSL certificate for Nginx
+  command: openssl req -new -nodes -x509 -subj "/C=CA/ST=Ontario/L=Ottawa/O=IT/CN={{ domain }}" -days 3650 -keyout {{ ssl_location}}/{{ domain }}.key -out {{ ssl_location}}/{{ domain }}.crt -extensions v3_ca
+  notify: reload nginx
+
+- name: Set permissions for the SSL directory and its contents
+  ansible.builtin.file:
+    path: "{{ ssl_location }}"
+    owner: root
+    group: root
+    mode: '0660'
+    recurse: yes
+  when: enable_https | bool

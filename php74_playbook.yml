@@ -1,0 +1,7 @@
+- name: Apply php7.4-fpm role to [server] host(s)
+  hosts: server
+  become: yes
+  vars:
+    max_worker_children: "8"
+  roles:
+    - php7_4-fpm

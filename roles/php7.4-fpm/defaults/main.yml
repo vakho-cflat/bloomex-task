@@ -1,0 +1,20 @@
+
+
+# error log location from php-fpm.conf
+php_fpm_error_log: "/var/log/php7.4-fpm.log"
+
+# php7.4-fpm socket
+php7_4_socket: "/run/php/php7.4-fpm.sock"
+
+# admin max php worker processes
+max_worker_children: "5"
+
+# admin error log state and location  
+php7_4_error_log_wwwconf: ";php_admin_value[error_log] = /var/log/fpm-php.www.log"
+
+# admin memory limit state and amount
+php7_4_memory_limit_wwwconf: ";php_admin_value[memory_limit] = 32M"
+
+# webroot directory
+webroot: "/var/www/html/"
+

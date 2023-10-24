@@ -1,0 +1,33 @@
+
+# web directory
+www_dir: /var/www/
+# domain
+#
+domain: "bloomex"
+
+# server name
+#
+server_name: "bloomex.local"
+
+# php socket location
+#
+php7_4_socket_unix: "unix:/run/php/php7.4-fpm.sock"
+
+# certificate generation with https
+#
+enable_https: false
+
+#ssl_certificate and key location
+#
+ssl_location: "/etc/nginx/ssl"
+
+
+# nginx defaults
+#
+nginx_vhost_config: "/etc/nginx/conf.d/"
+nginx_worker_processes: "auto"
+nginx_user: "www-data"
+worker_connections: "768"
+
+# php7.4-fpm installation
+install_php7_4: false

@@ -1,0 +1,10 @@
+- name: Apply Nginx role to [server] remote host
+  hosts: server
+  become: yes
+  vars:
+    server_name: lxc.local
+    domain: lxc
+    enable_https: true
+    install_php7_4: true
+  roles:
+    - nginx

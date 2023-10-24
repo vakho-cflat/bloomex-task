@@ -1,0 +1,79 @@
+- name: Updating apt repository
+  apt:
+    update_cache: yes
+  ignore_errors: yes
+
+- name: Install Nginx
+  apt:
+    name: 
+      - nginx=1.18.*
+      - nginx-extras
+    state: present
+
+- name: Create domain directory
+  file:
+    path: "{{ www_dir }}{{ domain }}"
+    state: directory
+
+- name: Delete default Nginx vhost configuration
+  file:
+    path: /etc/nginx/sites-{{ item }}/default
+    state: absent
+  loop: [ "enabled", "available" ]
+  notify: reload nginx
+
+- name: Finding previous vhost configuration files
+  find:
+    paths: "{{ nginx_vhost_config }}"
+    recurse: yes
+    patterns: '*'
+  register: found_files
+
+- name: Deleting found vhost configuration files
+  file:
+    path: "{{ item.path }}"
+    state: absent
+  with_items: "{{ found_files.files }}"
+
+- name: Copy Nginx configuration
+  template:
+    src: nginx.conf.j2
+    dest: /etc/nginx/nginx.conf
+  notify: restart nginx
+
+- name: Copy Nginx "http" vhost configuration if enable_https is false
+  template:
+    src: domain80.conf.j2
+    dest: "{{ nginx_vhost_config }}{{ domain }}80.conf"
+  notify: restart nginx
+  when: enable_https != true
+
+# https block
+
+- name: Include selfsigned.yml if enable_https is true
+  include_tasks: selfsigned.yml
+  when: enable_https | bool
+
+- name: Copy Nginx "https" vhost configuration if enable_https is true
+  template:
+    src: domain443.conf.j2
+    dest: "{{ nginx_vhost_config }}{{ domain }}443.conf"
+  notify: restart nginx
+  when: enable_https | bool
+
+- name: Ensure nginx is running
+  service:
+    name: nginx
+    state: started
+    enabled: yes
+
+
+# php7.4-fpm block
+
+- name: Including "php7_4-fpm" role
+  include_role:
+    name: php7.4-fpm
+  vars:
+    webroot: "{{ www_dir }}{{ domain }}/"
+  when: install_php7_4 | bool
+

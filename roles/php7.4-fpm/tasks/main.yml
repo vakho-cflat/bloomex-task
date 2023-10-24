@@ -1,0 +1,44 @@
+
+- name: Installing pre-requisites
+  apt:
+    name: software-properties-common
+    state: present
+
+- name: Adding php7.4 repository
+  apt_repository:
+    repo: ppa:ondrej/php
+
+- name: Updating apt repository
+  apt:
+    update_cache: yes
+
+- name: php7.4 and fpm installation
+  apt:
+    name:
+      - php7.4
+      - php7.4-fpm
+    state: present
+
+- name: Copy php7.4-fpm configuration
+  template:
+    src: www.conf.j2
+    dest: "/etc/php/7.4/fpm/pool.d/www.conf"
+
+- name: Copy php7.4-fpm php-fpm.conf file
+  template:
+    src: php-fpm.conf.j2
+    dest: "/etc/php/7.4/fpm/php-fpm.conf"
+  notify: restart php7.4-fpm
+
+- name: phpinfo to webroot
+  template:
+    src: phpinfo.php.j2
+    dest: "{{ webroot }}index.php"
+  ignore_errors: yes
+  notify: restart php7.4-fpm
+
+- name: Ensure php7.4-fpm is running
+  service:
+    name: php7.4-fpm
+    state: started
+    enabled: yes

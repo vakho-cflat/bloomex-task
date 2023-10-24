@@ -1,0 +1,33 @@
+server {
+	listen 80;
+	server_name {{ server_name }};
+
+	# HTTP requests to HTTPS
+	return 301 https://$host$request_uri;
+}
+
+server {
+        listen 443 ssl;
+        server_name {{ server_name }};
+        root {{ www_dir }}{{ domain }};
+
+	ssl_certificate {{ ssl_location}}/{{ domain }}.crt;
+	ssl_certificate_key {{ ssl_location}}/{{ domain }}.key;
+
+        index index.php index.html index.htm;
+
+        location / {
+        try_files $uri $uri/ =404;
+        }
+
+	location ~ \.php$ {
+	
+        fastcgi_pass {{ php7_4_socket_unix }};
+        include snippets/fastcgi-php.conf;
+        include fastcgi_params;
+
+	location ~ /\.ht {
+        deny all;
+    }
+  }
+}
