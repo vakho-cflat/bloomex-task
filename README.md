@@ -74,7 +74,8 @@ Script accept following arguments:
 - The script is using rsync to copy data in encrypted (`-e ssh`) and compressed (`-z`) manner.  
 - Allows changing required parameters, as described above.  
 - Creates logrotate configuration file `bloomex_backup` (if it doesn't already exist) within `/etc/logrotate.d/` to rotate logs in `fullOld` and `incOld` directories. Configuration paramateres can be added or removed from script, according to requirments.  
-- Creates 2 directories for full and incremental backup types: `full` and `inc`, where most recent files are located. Previous versions of these files are moved to 2 additional directories: `fullOld` and `incOld`, where these files are rotated by logrotate.     
+- Creates 2 directories for full and incremental backup types: `full` and `inc`, where most recent files are located. Previous versions of these files are moved to 2 additional directories: `fullOld` and `incOld`, where these files are rotated by logrotate.  
+
 I have included additional compression and archiving functionality for the files in the * *Old* directories. This addition serves to demonstrate my capability to perform both tasks within the script, especially since the task description regarding compression was somewhat unclear to me.  
   
 
