@@ -20,12 +20,12 @@ would result in nginx installation with https on and php-fpm installed.
 **nginx** \
 nginx role has following variables:
 
-`www_dir`		**web directory** \
-`domain`		**domain of the website/service** \
-`server_name`		**server name** \
-`php7_4_socket_unix`	**nginx forwads fpm request to this socket** \
-`enable_https`		**selfsigned certificate generation. this seting controls https as well** \
-`ssl_location`		**location where generated `.key` and `.crt` should be saved and referenced by nginx** 
+`www_dir` - web directory \
+`domain` - domain of the website/service \
+`server_name` - server name \
+`php7_4_socket_unix` - nginx forwads fpm request to this socket \
+`enable_https` - selfsigned certificate generation. this seting controls https as well \
+`ssl_location` - location where generated `.key` and `.crt` should be saved and referenced by nginx 
  
  
  \
@@ -39,19 +39,19 @@ nginx role `nginx.conf` variables. self-exlanatory:
 \
 installation of php7.4-fpm with nginx role
 
-`install_php7_4` **this variable controls if php7.4-fpm role will be installed along with nginx. recommended way of installation.** 
+`install_php7_4` - **this variable controls if php7.4-fpm role will be installed along with nginx. recommended way of installation.** 
 
 
 \
 **php7.4-fpm** \
 role php7.4-fpm accepts following variables: \
  \
-`php_fpm_error_log`		**defines error log location in `php-fpm.conf`** \
-`php7_4_socket`			**defines where php7.4-fpm socket runs** \
-`max_worker_children`		**number of maximum worker processes** \
-`php7_4_error_log_wwwconf`	**defines error log location AND state in `www.conf` file** \
-`php7_4_memory_limit_wwwconf`	**defines memory limit in `www.conf` file** \
-`webroot` 			**defines webroot directory, where `index.php` file should be placed**  
+`php_fpm_error_log` - defines error log location in `php-fpm.conf` \
+`php7_4_socket` - defines where php7.4-fpm socket runs \
+`max_worker_children` - number of maximum worker processes \
+`php7_4_error_log_wwwconf` - defines error log location AND state in `www.conf` file \
+`php7_4_memory_limit_wwwconf` - defines memory limit in `www.conf` file \
+`webroot` - defines webroot directory, where `index.php` file should be placed  
   
 <br>
   
