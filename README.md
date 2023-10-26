@@ -37,9 +37,9 @@ nginx role `nginx.conf` variables. self-exlanatory:
 `worker_connections` 
 
 \
-installation of php7.4-fpm with nginx role
+**Installation of php7.4-fpm with nginx role:**
 
-`install_php7_4` - **this variable controls if php7.4-fpm role will be installed along with nginx. recommended way of installation.** 
+`install_php7_4` - this variable controls if php7.4-fpm role will be installed along with nginx. recommended way of installation. 
 
 
 \
