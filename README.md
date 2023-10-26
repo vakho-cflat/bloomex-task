@@ -1,7 +1,7 @@
 # bloomex-tasks
 ## iptables task
 iptables rules are located at `iptables_task` directory.
-make sure to restore `iptables_v4.conf` in iptables, place `01-iptables_logs.conf` in `/etc/rsyslog.d/` directory and restart rsyslog so logging can work as intended.
+Make sure to restore `iptables_v4.conf` in iptables, place `01-iptables_logs.conf` in `/etc/rsyslog.d/` directory and restart rsyslog so logging can work as intended.
   
 <br>
 
