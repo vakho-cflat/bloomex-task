@@ -59,3 +59,22 @@ role php7.4-fpm accepts following variables: \
 Added backup script in `backup` directory.  
 Description coming soon
 
+This script performs file transfer from remote server.  
+Script accept following arguments:  
+`-t` or `--type` - type of backup, either `full` or `inc`  
+`-u` or `--user` - username, which will be used for remote connection   
+`-s` or `--source` - source directory path  
+`-d` or `--destination` - local destination directory path  
+`-i` or `--ip` - remote server ip address
+`-D` or `--debug` - flag to enable debug mode  
+`-h` or `--help` - flag to display help  
+
+
+**The Script**
+- The script is using rsync to copy data in encrypted (`-e ssh`) and compressed (`-z`) manner.  
+- Allows changing required parameters, as described above.  
+- Creates logrotate configuration file `bloomex_backup` (if it doesn't already exist) within `/etc/logrotate.d/` to rotate logs in `fullOld` and `incOld` directories. Configuration paramateres can be added or removed from script, according to requirments.  
+- Creates 2 directories for full and incremental backup types: `full` and `inc`, where most recent files are located. Previous versions of these files are moved to 2 additional directories: `fullOld` and `incOld`, where these files are rotated by logrotate.  
+I have included additional compression and archiving functionality for the files in the * *Old* directories. This addition serves to demonstrate my capability to perform both tasks within the script, especially since the task description regarding compression was somewhat unclear to me.  
+  
+
